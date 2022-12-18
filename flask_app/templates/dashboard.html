@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bands</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <h1 class="text-center">Rock On {{user.first_name}} {{user.last_name}}!!!</h1>
+
+
+
+
+
+    <nav class="d-flex justify-content-between align-items-center col-12">
+        <h1>All Bands:</h1>
+        <div class="d-flex col-4 justify-content-around">
+            <a href="/mybands" class="btn btn-primary">My Bands</a>
+            <a href="/new/band" class="btn btn-primary">New Band</a>
+            <a href="/logout" class="btn btn-info">Logout</a>
+
+        </div>
+
+    </nav>
+    <div class="col-8 mx-auto">
+
+        <table class="table table-hover">
+            <thead class="text-center">
+                <tr>
+                    <th>Band Name</th>
+                    <th>Founding Member</th>
+                    <th>Genre</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                {% for band in all_bands %}
+                    <tr>
+                        <td class="">{{band.name}}</td>
+                        <td class="">{{band.creator.first_name}} {{band.creator.last_name}}</td>
+                        <td class="">{{band.genre}}</td>
+                        {% if session.user_id == band.user_id  %}
+                            <td class=""><a href="/edit/band/{{ band.id }}">Edit</a> | <a href="/destroy/band/{{ band.id }}">Delete</a></td>
+                         {% endif %}
+                     </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
